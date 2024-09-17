@@ -11,7 +11,7 @@
 
     <nav class="navbar sticky-top bg-body-tertiary">
             @if (Route::has('login'))
-                <div class="container-fluid">
+                <div class="container-fluid justify-content-end">
                     @auth
                     <a class="navbar-brand text-end" href="{{ url('/dashboard') }}">Dashboard</a>
                     @else
