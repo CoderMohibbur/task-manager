@@ -1,0 +1,10 @@
+# Laravel Framework
+vendor/
+storage/
+bootstrap/cache/
+node_modules/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
