@@ -32,3 +32,11 @@ Route::get('/about',function(){
 return view('pages.About');
 
 });
+
+Route:: get('admin-page',function(){
+
+return view('admin.index');
+
+
+
+});
