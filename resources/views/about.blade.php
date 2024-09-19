@@ -153,6 +153,7 @@
 
 
 @section('content')
+<<<<<<< HEAD
 
 
 
@@ -226,4 +227,7 @@
 
 
 >>>>>>> 3fd06a7bb8280ccdcb205334db1c4777cccb23e0
+=======
+<h1>About Page</h1>
+>>>>>>> parent of 3fd06a7 (about dasbord page ceret)
 @stop
