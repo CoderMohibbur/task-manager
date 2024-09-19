@@ -316,13 +316,14 @@ return [
             'can' => 'manage-blog',
         ],
         [
-            'text' => 'pages',
+            'text' => 'Dashboard',
             'url' => 'admin/pages',
             'icon' => 'far fa-fw fa-file',
             'label' => 4,
             'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
+        ['header' => 'Task'],
         [
             'text' => 'profile',
             'url' => 'admin/settings',
@@ -334,15 +335,19 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text' => 'multilevel',
+            'text' => 'Task',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'level_one',
+                    'text' => 'List Task',
                     'url' => '#',
                 ],
                 [
-                    'text' => 'level_one',
+                    'text' => 'Add Task',
+                    'url' => '#',
+                ],
+                [
+                    'text' => 'Add Task',
                     'url' => '#',
                     'submenu' => [
                         [
