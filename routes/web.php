@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Project;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ProjectController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,3 +25,22 @@ Route::controller(App\Http\Controllers\TaskController::class)->group(function ()
     Route::get('/add-task', 'create');
     Route::get('/task', 'index');
 });
+Route::resource('tasks', TaskController::class);
+Route::patch('tasks/{task}/status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+Route::get('tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('tasks', [TaskController::class, 'store'])->name('tasks.store');
+Route::resource('tasks', TaskController::class);
+Route::post('/tasks/{task}/update-status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
+Route::patch('/tasks/{task}/update-status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
+Route::post('/tasks/{task}/update-status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
+
+
+// routes/web.php
+
+
+Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
+Route::post('projects', [ProjectController::class, 'store'])->name('projects.store');
+Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');

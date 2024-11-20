@@ -1,5 +1,6 @@
 <?php
 
+// app/Models/Task.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,11 +10,12 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $table = 'tasks';
-
     protected $fillable = [
-        'name',
-        'description',
-        'status'
+        'title', 'description', 'priority', 'status', 'project_id'
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }
