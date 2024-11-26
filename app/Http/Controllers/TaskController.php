@@ -1,6 +1,5 @@
 <?php
 
-// app/Http/Controllers/TaskController.php
 namespace App\Http\Controllers;
 
 use App\Models\Task;
@@ -9,12 +8,38 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::with('project')->get();
-        return view('tasks.index', compact('tasks'));
-    }
+        // Filter Inputs
+        $status = $request->input('status');
+        $priority = $request->input('priority');
+        $search = $request->input('search');
 
+        // Query
+        $tasks = Task::query();
+
+        if ($status) {
+            $tasks->where('status', $status);
+        }
+
+        if ($priority) {
+            $tasks->where('priority', $priority);
+        }
+
+        if ($search) {
+            $tasks->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        // Get all tasks and separate the completed ones
+        $tasks = $tasks->get();
+        $completedTasks = $tasks->where('status', 'Completed');
+        $pendingAndInProgressTasks = $tasks->whereNotIn('status', ['Completed']);
+
+        return view('tasks.index', compact('pendingAndInProgressTasks', 'completedTasks'));
+    }
 
     public function create()
     {
@@ -22,84 +47,69 @@ class TaskController extends Controller
         return view('tasks.create', compact('projects'));
     }
 
-    // TaskController.php
-
-public function store(Request $request)
-{
-    // টাস্কের জন্য ভ্যালিডেশন
-    $request->validate([
-        'project_id' => 'required|exists:projects,id', // নিশ্চিত করুন যে প্রোজেক্ট আইডি প্রকৃত প্রোজেক্ট থেকে এসেছে
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'priority' => 'required|in:Low,Medium,High',
-        'status' => 'required|in:pending,in_progress,completed',
-    ]);
-
-    // টাস্ক তৈরি করা
-    Task::create([
-        'project_id' => $request->project_id,
-        'title' => $request->title,
-        'description' => $request->description,
-        'priority' => $request->priority,
-        'status' => $request->status,
-    ]);
-
-    return redirect()->route('tasks.index')->with('success', 'Task created successfully!');
-}
-
-
-
-
-
-public function edit($id)
-{
-    $task = Task::findOrFail($id);
-    return view('tasks.edit', compact('task'));
-}
-
-public function update(Request $request, $id)
-{
-    $task = Task::findOrFail($id);
-
-    // Validate the input
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'priority' => 'required|in:Low,Medium,High',
-        'status' => 'required|in:pending,in_progress,completed',
-    ]);
-
-    // Update the task with the new data
-    $task->update([
-        'title' => $request->input('title'),
-        'description' => $request->input('description'),
-        'priority' => $request->input('priority'),
-        'status' => $request->input('status'),
-    ]);
-
-    // Redirect back with success message
-    return redirect()->route('tasks.index')->with('success', 'Task updated successfully!');
-}
-
-
-
-    public function destroy(Task $task)
+    public function store(Request $request)
     {
-        $task->delete();
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'project_id' => 'required|exists:projects,id',
+            'priority' => 'required|in:Low,Medium,High',
+            'status' => 'required|in:Pending,In Progress,Completed',
+            'file' => 'nullable|file|mimes:jpg,png,pdf,docx,zip|max:10240',  // ফাইল সাইজ ও টাইপ চেক করুন
+        ]);
+
+        $task = new Task();
+        $task->title = $request->title;
+        $task->description = $request->description;
+        $task->project_id = $request->project_id;
+        $task->priority = $request->priority;
+        $task->status = $request->status;
+
+        // ফাইল আপলোডের জন্য
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filePath = $file->store('task_files', 'public');  // 'public' ড্রাইভে ফাইল স্টোর করুন
+            $task->file = $filePath;
+        }
+
+        $task->save();
+
         return redirect()->route('tasks.index');
     }
+
 
     public function updateStatus(Request $request, Task $task)
     {
         $request->validate([
-            'status' => 'required|in:pending,in_progress,completed',
+            'status' => 'required|in:Pending,In Progress,Completed',
         ]);
 
-        $task->status = $request->status;
-        $task->save();
+        // Update status
+        $task->update([
+            'status' => $request->status
+        ]);
 
-        return redirect()->route('tasks.index')->with('success', 'Task status updated successfully!');
+        return redirect()->route('tasks.index');
     }
+
+    // In the TaskController
+public function checkIn($id)
+{
+    $task = Task::findOrFail($id);
+    $task->check_in_time = now();
+    $task->save();
+
+    return redirect()->route('tasks.index')->with('success', 'Checked in successfully');
+}
+
+public function checkOut($id)
+{
+    $task = Task::findOrFail($id);
+    $task->check_out_time = now();
+    $task->save();
+
+    return redirect()->route('tasks.index')->with('success', 'Checked out successfully');
+}
 
 
 }

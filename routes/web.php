@@ -44,3 +44,14 @@ Route::post('projects', [ProjectController::class, 'store'])->name('projects.sto
 Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+// routes/web.php
+
+
+Route::get('/projects/{project}', function (Project $project) {
+    return view('projects.show', compact('project'));
+})->name('projects.show');
+Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
+// In web.php
+Route::patch('/tasks/{id}/check-in', [TaskController::class, 'checkIn'])->name('tasks.checkIn');
+Route::patch('/tasks/{id}/check-out', [TaskController::class, 'checkOut'])->name('tasks.checkOut');
+Route::patch('/tasks/{task}/update-status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');

@@ -10,15 +10,15 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->text('description')->nullable();
-            $table->enum('priority', ['Low', 'Medium', 'High']);
-            $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending');
+            $table->text('description');
+            // এখানে status কলামের ডেটা টাইপ সংশোধন করুন
+            $table->enum('status', ['Pending', 'In Progress', 'Completed'])->default('Pending');
+            $table->string('priority');
             $table->timestamps();
         });
-
     }
+
 
     public function down()
     {
