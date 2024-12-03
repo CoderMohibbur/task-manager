@@ -111,5 +111,36 @@ public function checkOut($id)
     return redirect()->route('tasks.index')->with('success', 'Checked out successfully');
 }
 
+public function completeTask($id)
+{
+    $task = Task::find($id);
+
+    if (!$task) {
+        return redirect()->route('tasks.index')->with('error', 'Task not found.');
+    }
+
+    $task->status = 'Completed';
+    $task->completed_at = now(); // Current time store
+    $task->save();
+
+    return redirect()->route('tasks.index')->with('success', 'Task marked as completed.');
+}
+
+public function edit($id)
+{
+    $task = Task::findOrFail($id); // টাস্ক খুঁজে বের করুন
+    return view('tasks.edit', compact('task')); // টাস্ক সম্পাদনা করার ভিউ পাঠান
+}
+
+public function destroy($id)
+{
+    $task = Task::findOrFail($id); // টাস্ক খুঁজে বের করুন
+    $task->delete(); // ডিলিট করুন
+
+    return redirect()->route('tasks.index')->with('success', 'Task deleted successfully'); // রিডাইরেক্ট করুন
+}
+
+
+
 
 }

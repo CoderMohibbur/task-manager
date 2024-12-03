@@ -55,3 +55,6 @@ Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects
 Route::patch('/tasks/{id}/check-in', [TaskController::class, 'checkIn'])->name('tasks.checkIn');
 Route::patch('/tasks/{id}/check-out', [TaskController::class, 'checkOut'])->name('tasks.checkOut');
 Route::patch('/tasks/{task}/update-status', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
+Route::post('/tasks/{id}/complete', [TaskController::class, 'completeTask'])->name('tasks.complete');
+Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');

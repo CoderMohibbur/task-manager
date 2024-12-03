@@ -15,6 +15,7 @@ class Task extends Model
         'priority',
         'status',
         'project_id',
+        'completed_at',
         'check_in_time', // Added check_in_time
         'check_out_time', // Added check_out_time
     ];
