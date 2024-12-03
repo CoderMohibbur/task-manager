@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite4e9320ac9a725274c961979c0b404c9
+class ComposerStaticInit7b5b807b5215722f38943438bca0da12
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -343,8 +343,8 @@ class ComposerStaticInite4e9320ac9a725274c961979c0b404c9
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -555,6 +555,7 @@ class ComposerStaticInite4e9320ac9a725274c961979c0b404c9
         'App\\Actions\\Fortify\\ResetUserPassword' => __DIR__ . '/../..' . '/app/Actions/Fortify/ResetUserPassword.php',
         'App\\Actions\\Fortify\\UpdateUserPassword' => __DIR__ . '/../..' . '/app/Actions/Fortify/UpdateUserPassword.php',
         'App\\Actions\\Fortify\\UpdateUserProfileInformation' => __DIR__ . '/../..' . '/app/Actions/Fortify/UpdateUserProfileInformation.php',
+        'App\\Actions\\Jetstream\\DeleteUser' => __DIR__ . '/../..' . '/app/Actions/Jetstream/DeleteUser.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
         'App\\Http\\Controllers\\Auth\\EmailVerificationNotificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/EmailVerificationNotificationController.php',
@@ -575,6 +576,7 @@ class ComposerStaticInite4e9320ac9a725274c961979c0b404c9
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\FortifyServiceProvider' => __DIR__ . '/../..' . '/app/Providers/FortifyServiceProvider.php',
+        'App\\Providers\\JetstreamServiceProvider' => __DIR__ . '/../..' . '/app/Providers/JetstreamServiceProvider.php',
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
         'App\\View\\Components\\GuestLayout' => __DIR__ . '/../..' . '/app/View/Components/GuestLayout.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
@@ -6995,14 +6997,27 @@ class ComposerStaticInite4e9320ac9a725274c961979c0b404c9
         'Termwind\\ValueObjects\\Node' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Node.php',
         'Termwind\\ValueObjects\\Style' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Style.php',
         'Termwind\\ValueObjects\\Styles' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Styles.php',
+        'Tests\\Feature\\ApiTokenPermissionsTest' => __DIR__ . '/../..' . '/tests/Feature/ApiTokenPermissionsTest.php',
         'Tests\\Feature\\Auth\\AuthenticationTest' => __DIR__ . '/../..' . '/tests/Feature/Auth/AuthenticationTest.php',
         'Tests\\Feature\\Auth\\EmailVerificationTest' => __DIR__ . '/../..' . '/tests/Feature/Auth/EmailVerificationTest.php',
         'Tests\\Feature\\Auth\\PasswordConfirmationTest' => __DIR__ . '/../..' . '/tests/Feature/Auth/PasswordConfirmationTest.php',
         'Tests\\Feature\\Auth\\PasswordResetTest' => __DIR__ . '/../..' . '/tests/Feature/Auth/PasswordResetTest.php',
         'Tests\\Feature\\Auth\\PasswordUpdateTest' => __DIR__ . '/../..' . '/tests/Feature/Auth/PasswordUpdateTest.php',
         'Tests\\Feature\\Auth\\RegistrationTest' => __DIR__ . '/../..' . '/tests/Feature/Auth/RegistrationTest.php',
+        'Tests\\Feature\\AuthenticationTest' => __DIR__ . '/../..' . '/tests/Feature/AuthenticationTest.php',
+        'Tests\\Feature\\BrowserSessionsTest' => __DIR__ . '/../..' . '/tests/Feature/BrowserSessionsTest.php',
+        'Tests\\Feature\\CreateApiTokenTest' => __DIR__ . '/../..' . '/tests/Feature/CreateApiTokenTest.php',
+        'Tests\\Feature\\DeleteAccountTest' => __DIR__ . '/../..' . '/tests/Feature/DeleteAccountTest.php',
+        'Tests\\Feature\\DeleteApiTokenTest' => __DIR__ . '/../..' . '/tests/Feature/DeleteApiTokenTest.php',
+        'Tests\\Feature\\EmailVerificationTest' => __DIR__ . '/../..' . '/tests/Feature/EmailVerificationTest.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
+        'Tests\\Feature\\PasswordConfirmationTest' => __DIR__ . '/../..' . '/tests/Feature/PasswordConfirmationTest.php',
+        'Tests\\Feature\\PasswordResetTest' => __DIR__ . '/../..' . '/tests/Feature/PasswordResetTest.php',
+        'Tests\\Feature\\ProfileInformationTest' => __DIR__ . '/../..' . '/tests/Feature/ProfileInformationTest.php',
         'Tests\\Feature\\ProfileTest' => __DIR__ . '/../..' . '/tests/Feature/ProfileTest.php',
+        'Tests\\Feature\\RegistrationTest' => __DIR__ . '/../..' . '/tests/Feature/RegistrationTest.php',
+        'Tests\\Feature\\TwoFactorAuthenticationSettingsTest' => __DIR__ . '/../..' . '/tests/Feature/TwoFactorAuthenticationSettingsTest.php',
+        'Tests\\Feature\\UpdatePasswordTest' => __DIR__ . '/../..' . '/tests/Feature/UpdatePasswordTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
@@ -7051,9 +7066,9 @@ class ComposerStaticInite4e9320ac9a725274c961979c0b404c9
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite4e9320ac9a725274c961979c0b404c9::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite4e9320ac9a725274c961979c0b404c9::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInite4e9320ac9a725274c961979c0b404c9::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7b5b807b5215722f38943438bca0da12::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7b5b807b5215722f38943438bca0da12::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit7b5b807b5215722f38943438bca0da12::$classMap;
 
         }, null, ClassLoader::class);
     }
