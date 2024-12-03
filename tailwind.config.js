@@ -13,6 +13,7 @@ export default {
         './resources/**/*.vue',
         './node_modules/flowbite/**/*.js',  // Flowbite JS
     ],
+    darkMode: 'class',
 
     theme: {
         extend: {
