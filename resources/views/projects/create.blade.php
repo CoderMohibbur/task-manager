@@ -1,6 +1,11 @@
 <!-- resources/views/projects/create.blade.php -->
-
-<form action="{{ route('projects.store') }}" method="POST">
+<x-app-layout>
+    <x-slot name="header">
+        <h1 class="text-gray-900 dark:text-white">
+            {{ __('Projects/Create') }}
+        </h1>
+    </x-slot>
+  <form action="{{ route('projects.store') }}" method="POST">
     @csrf
 
     <div>
@@ -16,4 +21,5 @@
     <div>
         <button type="submit">Create Project</button>
     </div>
-</form>
+ </form>
+</x-app-layout>
