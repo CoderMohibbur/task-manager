@@ -5,6 +5,8 @@ use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\BookingController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -58,3 +60,11 @@ Route::patch('/tasks/{task}/update-status', [TaskController::class, 'updateStatu
 Route::post('/tasks/{id}/complete', [TaskController::class, 'completeTask'])->name('tasks.complete');
 Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
 Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+
+
+
+
+//Booking
+Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
