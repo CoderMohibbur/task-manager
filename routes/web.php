@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Models\Project;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SlotController;
 use App\Http\Controllers\TaskController;
-use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::controller(App\Http\Controllers\TaskController::class)->group(function () {
     Route::get('/add-task', 'create');
@@ -53,6 +54,10 @@ Route::get('/projects/{project}', function (Project $project) {
     return view('projects.show', compact('project'));
 })->name('projects.show');
 Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
+Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
+Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+
 // In web.php
 Route::patch('/tasks/{id}/check-in', [TaskController::class, 'checkIn'])->name('tasks.checkIn');
 Route::patch('/tasks/{id}/check-out', [TaskController::class, 'checkOut'])->name('tasks.checkOut');
@@ -68,3 +73,23 @@ Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.de
 Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
 Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+
+
+//ProjectController
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+Route::put('/projects/{prTask Management
+oject}', [ProjectController::class, 'update'])->name('projects.update');
+Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+
+
+
+Route::resource('bookings', BookingController::class);
+Route::get('available-slots', [SlotController::class, 'availableSlots'])->name('slots.available');
+
+Route::get('/bookings/available-slots', [BookingController::class, 'availableSlots'])->name('bookings.available-slots');
+Route::post('/bookings/create', [BookingController::class, 'createBooking'])->name('bookings.create');
+Route::get('/bookings/{id}', [BookingController::class, 'show'])->name('bookings.show');
+Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
